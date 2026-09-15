@@ -1,0 +1,49 @@
+.quick-header {
+  min-height: 72px;
+  gap: 16px;
+}
+
+.quick-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.quick-lines button {
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid #b8d4ca;
+  border-radius: 10px;
+  background: #edf7f3;
+  color: #076c4d;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.quick-lines button:hover:not(:disabled) {
+  background: #dff1e9;
+}
+
+.quick-lines button.active {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 3px 10px #087f5b33;
+}
+
+.quick-lines button:disabled {
+  cursor: wait;
+  opacity: .45;
+}
+
+.source-live {
+  min-width: 112px;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .quick-header { align-items: center; }
+  .quick-lines { gap: 6px; }
+  .quick-lines button { height: 36px; padding: 0 10px; }
+  .source-live { min-width: auto; }
+}

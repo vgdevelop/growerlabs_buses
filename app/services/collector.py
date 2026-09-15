@@ -1,6 +1,8 @@
 import asyncio
 import logging
 import random
+import ssl
+from pathlib import Path
 
 import httpx
 from prometheus_client import Counter, Gauge, Histogram
@@ -9,6 +11,7 @@ from app.services.cache import MemorySnapshotCache
 from app.services.normalizer import normalize_stm_geojson
 
 logger = logging.getLogger(__name__)
+INTERMEDIATE_CA = Path(__file__).resolve().parents[1] / "certs" / "abitab-ssl-domain-validated.pem"
 COLLECTIONS = Counter("transit_collector_requests_total", "Upstream collection attempts", ["result"])
 LATENCY = Histogram("transit_collector_request_seconds", "Upstream request duration")
 FRESHNESS = Gauge("transit_source_age_seconds", "Age of last good source snapshot", ["source"])
@@ -21,6 +24,8 @@ class RealtimeCollector:
         self.interval_seconds = max(interval_seconds, 10)
         self.cache = cache
         self._failures = 0
+        self._ssl_context = ssl.create_default_context()
+        self._ssl_context.load_verify_locations(cafile=INTERMEDIATE_CA)
 
     async def run(self) -> None:
         while True:
@@ -31,7 +36,7 @@ class RealtimeCollector:
     async def collect_once(self) -> None:
         try:
             with LATENCY.time():
-                async with httpx.AsyncClient(timeout=10) as client:
+                async with httpx.AsyncClient(timeout=10, verify=self._ssl_context) as client:
                     response = await client.post(self.url, json={"subsistema": "-1", "empresa": "-1"})
             if response.status_code in (403, 429):
                 raise RuntimeError(f"collection disabled by upstream HTTP {response.status_code}")
