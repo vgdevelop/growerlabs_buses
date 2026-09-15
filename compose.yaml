@@ -1,0 +1,21 @@
+name: growerlabs-transit
+
+services:
+  api:
+    build:
+      context: .
+    environment:
+      GPS_COLLECTION_ENABLED: ${GPS_COLLECTION_ENABLED:-true}
+      GPS_COLLECTION_INTERVAL_SECONDS: ${GPS_COLLECTION_INTERVAL_SECONDS:-10}
+      GPS_STALE_AFTER_SECONDS: ${GPS_STALE_AFTER_SECONDS:-45}
+      GPS_SOURCE_URL: https://www.montevideo.gub.uy/buses/rest/stm-online
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+    mem_limit: 256m
+    cpus: 1.0
+    pids_limit: 128
+    ports:
+      - "127.0.0.1:8080:8080"

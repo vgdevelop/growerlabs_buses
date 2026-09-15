@@ -1,0 +1,40 @@
+/* Reused DOM markers: one compact badge per visible vehicle (maximum 300). */
+.bus-line-marker {
+  display: grid;
+  place-items: center;
+  width: 30px !important;
+  height: 30px !important;
+  margin: -15px 0 0 -15px !important;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #087f5b;
+  color: #fff;
+  box-shadow: 0 1px 5px #071f1780;
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+.bus-line-marker.stale { background: #d8870e; }
+.bus-line-marker.is-selected {
+  z-index: 1000 !important;
+  outline: 4px solid #ffe08a;
+  box-shadow: 0 0 0 2px #7a4b00, 0 3px 10px #071f1790;
+}
+.bus-line-marker span { pointer-events: none; }
+.bus-line-marker .compact { font-size: 7px; letter-spacing: -.25px; }
+.popup-line-filter {
+  display: inline-block;
+  border: 0;
+  border-radius: 7px;
+  background: #087f5b;
+  color: #fff;
+  padding: 6px 9px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+}
+.popup-line-filter:hover,
+.popup-line-filter:focus-visible { background: #075c43; outline: 2px solid #8ed8be; }

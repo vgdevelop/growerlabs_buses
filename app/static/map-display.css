@@ -1,0 +1,35 @@
+/* Enlarged map and high-contrast stop presentation. */
+header, main, footer { max-width: 1600px; }
+main { grid-template-columns: minmax(0, 4fr) 320px; }
+#map { height: min(68vh, 700px); min-height: 480px; }
+.dot.stop {
+  width: 10px;
+  height: 10px;
+  background: #f97316;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px #9a3412;
+}
+.map-card:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.map-card:fullscreen #map { height: auto; min-height: 0; flex: 1; }
+.map-card:fullscreen .toolbar,
+.map-card:fullscreen .legend { flex: 0 0 auto; }
+.map-card:fullscreen #map-fullscreen {
+  background: #dcebe5;
+  color: #075c43;
+  font-weight: 700;
+}
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; }
+  #map { height: 62vh; min-height: 420px; }
+}
+@media (max-width: 600px) {
+  #map { height: 55vh; min-height: 320px; }
+}

@@ -1,0 +1,2 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-56.1645,-34.9011]},"properties":{"codigoBus":"SYN-101","codigoEmpresa":"SYN","linea":"Demo A","variante":"1","destinoDesc":"Centro","velocidad":22}},{"type":"Feature","geometry":{"type":"Point","coordinates":[-56.205,-34.87]},"properties":{"codigoBus":"SYN-202","codigoEmpresa":"SYN","linea":"Demo B","variante":"2","destinoDesc":"Terminal","velocidad":14}}]}
+

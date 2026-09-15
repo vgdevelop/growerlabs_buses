@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Grower Labs Transit</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="/static/style.css?v=13">
+  <link rel="stylesheet" href="/static/panel.css?v=13">
+  <link rel="stylesheet" href="/static/interactions.css?v=13">
+  <link rel="stylesheet" href="/static/map-display.css?v=13">
+  <link rel="stylesheet" href="/static/bus-markers.css?v=13">
+</head>
+<body>
+  <header><div><p class="eyebrow">Grower Labs · STM en tiempo real</p><h1>¿Dónde está mi ómnibus?</h1><p class="subtitle">Posiciones públicas del Sistema de Transporte Metropolitano.</p></div><div><span id="status" class="status">Conectando</span><p id="updated" class="updated"></p></div></header>
+  <main>
+    <section class="map-card">
+      <div class="toolbar"><label>Empresa<select id="operator"><option value="">Seleccione</option></select></label><span class="or">o</span><label>Línea<select id="route"><option value="">Seleccione</option></select></label><label>Subsistema<select id="subsystem"><option value="">Todos</option></select></label><button id="clear" type="button">Limpiar</button><button id="map-fullscreen" type="button" aria-pressed="false" title="Mostrar el mapa en pantalla completa">Pantalla completa</button><strong id="count">Seleccione empresa o línea</strong></div>
+      <div id="map" aria-label="Mapa de posiciones actuales de ómnibus"></div>
+      <div class="legend"><span><i class="dot live"></i> Ómnibus actual</span><span><i class="dot stale"></i> Ómnibus atrasado</span><span><i class="dot stop"></i> Parada oficial</span><strong id="stop-count"></strong></div>
+    </section>
+    <aside><h2>Información de la línea</h2><div id="line-panel"></div><div id="stop-detail"></div><div class="source-section"><h2>Estado de la fuente</h2><dl id="source"></dl><h2>Cobertura declarada</h2><div id="coverage"></div><p class="notice">Sin base de datos: GPS en memoria e índices oficiales estáticos por línea.</p><a class="official" href="https://www.montevideo.gub.uy/buses/mapaBuses.html" target="_blank" rel="noreferrer">Abrir mapa oficial ↗</a></div></aside>
+  </main>
+  <footer>Fuentes: Intendencia de Montevideo · <a href="https://catalogodatos.gub.uy/dataset/transporte-colectivo-paradas-puntos-de-control-y-recorridos-de-omnibus" target="_blank" rel="noreferrer">Paradas oficiales</a> · <a href="/docs">API local</a></footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="/static/map.js?v=13.5"></script>
+</body></html>
