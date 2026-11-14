@@ -1,21 +1,67 @@
-name: growerlabs-transit
+---
+name: growerlabs-buses
 
 services:
   api:
-    build:
-      context: .
+    image: growerlabs-buses:86416741a449
+    restart: unless-stopped
     environment:
-      GPS_COLLECTION_ENABLED: ${GPS_COLLECTION_ENABLED:-true}
-      GPS_COLLECTION_INTERVAL_SECONDS: ${GPS_COLLECTION_INTERVAL_SECONDS:-10}
-      GPS_STALE_AFTER_SECONDS: ${GPS_STALE_AFTER_SECONDS:-45}
+      GPS_COLLECTION_ENABLED: "true"
+      GPS_COLLECTION_INTERVAL_SECONDS: "10"
+      GPS_STALE_AFTER_SECONDS: "45"
       GPS_SOURCE_URL: https://www.montevideo.gub.uy/buses/rest/stm-online
+    expose:
+      - "8080"
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=2)"]
+      test:
+        - CMD
+        - python
+        - -c
+        - >-
+          import urllib.request;
+          urllib.request.urlopen('http://localhost:8080/health', timeout=2)
       interval: 10s
       timeout: 3s
       retries: 12
+      start_period: 10s
     mem_limit: 256m
     cpus: 1.0
     pids_limit: 128
-    ports:
-      - "0.0.0.0:8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - infra_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=infra_network"
+      - "traefik.http.routers.growerlabs-buses.entrypoints=websecure"
+      - "traefik.http.routers.growerlabs-buses.rule=Host(`${BUSES_DOMAIN:?BUSES_DOMAIN is required}`)"
+      - "traefik.http.routers.growerlabs-buses.tls=true"
+      - "traefik.http.routers.growerlabs-buses.tls.certresolver=cloudflare"
+      - "traefik.http.routers.growerlabs-buses.middlewares=public-site-headers@file"
+      - "traefik.http.routers.growerlabs-buses.service=growerlabs-buses"
+      - "traefik.http.routers.growerlabs-buses-admin.entrypoints=websecure"
+      - >-
+        traefik.http.routers.growerlabs-buses-admin.rule=Host(`${BUSES_DOMAIN:?BUSES_DOMAIN is required}`)
+        && (PathPrefix(`/docs`) || Path(`/openapi.json`) || Path(`/metrics`))
+      - "traefik.http.routers.growerlabs-buses-admin.priority=200"
+      - "traefik.http.routers.growerlabs-buses-admin.tls=true"
+      - "traefik.http.routers.growerlabs-buses-admin.tls.certresolver=cloudflare"
+      - "traefik.http.routers.growerlabs-buses-admin.middlewares=authelia-public@docker,security-headers@file"
+      - "traefik.http.routers.growerlabs-buses-admin.service=growerlabs-buses"
+      - "traefik.http.services.growerlabs-buses.loadbalancer.server.port=8080"
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+networks:
+  infra_network:
+    external: true
+    name: infra_network

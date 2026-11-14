@@ -1,5 +1,12 @@
 # Registro de cambios
 
+## CP-2026-11-14-server-sync
+
+- Sincroniza el código desplegado: accesos T1 y T6 seleccionables incluso sin vehículos GPS disponibles.
+- Incorpora la configuración del despliegue con dominio parametrizado mediante BUSES_DOMAIN y Dockerfile de actualización de la imagen existente.
+- Refuerza exclusiones de archivos de entorno, respaldos y volcados.
+- Validación: 24 pruebas aprobadas y Gitleaks 8.30.1 sin hallazgos en fuentes ni historial. Sin despliegue; reversión mediante la base de CHECKPOINT.md.
+
 ## CP-2026-09-15-lan-quick-navigation
 
 - Habilita acceso por red local mediante TCP 8080 restringido a `LocalSubnet`.

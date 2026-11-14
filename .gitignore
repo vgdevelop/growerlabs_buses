@@ -9,3 +9,10 @@ htmlcov/
 *.log
 .DS_Store
 Thumbs.db
+.env.*
+!.env.example
+backups/
+historico/
+*.dump
+*.sql
+*~

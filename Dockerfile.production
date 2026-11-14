@@ -1,0 +1,6 @@
+FROM growerlabs-buses:53ad069791dc
+
+# Reuse the already validated runtime; only the application and tests change.
+COPY --chown=65532:65532 app ./app
+COPY --chown=65532:65532 tests ./tests
+COPY --chown=65532:65532 pytest.ini .

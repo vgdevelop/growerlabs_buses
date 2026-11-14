@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/static/bus-markers.css?v=13">
 </head>
 <body>
-  <header class="quick-header"><nav class="quick-lines" aria-label="Accesos rápidos del mapa"><button type="button" data-quick-line="701" data-company="18" disabled>Línea 701</button><button type="button" data-quick-line="706" data-company="18" disabled>Línea 706</button><button type="button" data-quick-line="T4R" data-company="35" disabled>Línea T4R</button><button type="button" data-quick-line="T4N" data-company="35" disabled>Línea T4N</button><button type="button" data-map-location="pando">Pando</button><button type="button" data-map-location="parque">Parque</button></nav><div class="source-live"><span id="status" class="status">Conectando</span><p id="updated" class="updated"></p></div></header>
+  <header class="quick-header"><nav class="quick-lines" aria-label="Accesos rápidos del mapa"><button type="button" data-quick-line="701" data-company="18" disabled>Línea 701</button><button type="button" data-quick-line="706" data-company="18" disabled>Línea 706</button><button type="button" data-quick-line="T1" data-company="35" data-always-selectable="true" disabled>Línea T1</button><button type="button" data-quick-line="T6" data-always-selectable="true" disabled>Línea T6</button><button type="button" data-quick-line="T4R" data-company="35" disabled>Línea T4R</button><button type="button" data-quick-line="T4N" data-company="35" disabled>Línea T4N</button><button type="button" data-map-location="pando">Pando</button><button type="button" data-map-location="parque">Parque</button></nav><div class="source-live"><span id="status" class="status">Conectando</span><p id="updated" class="updated"></p></div></header>
   <main>
     <section class="map-card">
       <div class="toolbar"><label>Empresa<select id="operator"><option value="">Seleccione</option></select></label><span class="or">o</span><label>Línea<select id="route"><option value="">Seleccione</option></select></label><label>Subsistema<select id="subsystem"><option value="">Todos</option></select></label><button id="clear" type="button">Limpiar</button><button id="map-fullscreen" type="button" aria-pressed="false" title="Mostrar el mapa en pantalla completa">Pantalla completa</button><strong id="count">Seleccione empresa o línea</strong></div>
@@ -23,5 +23,5 @@
   </main>
   <footer>Fuentes: Intendencia de Montevideo · <a href="https://catalogodatos.gub.uy/dataset/transporte-colectivo-paradas-puntos-de-control-y-recorridos-de-omnibus" target="_blank" rel="noreferrer">Paradas oficiales</a> · <a href="/docs">API local</a></footer>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="/static/map.js?v=18"></script>
+  <script src="/static/map.js?v=20"></script>
 </body></html>
